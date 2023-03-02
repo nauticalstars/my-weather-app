@@ -44,16 +44,16 @@ function cityFormValues(event) {
   let cityInput = document.querySelector("#cityInput");
   let city = `${cityInput.value}`;
   let apiKey = "89045e8b02ffo7bc061tb52f38ead08c";
-  let units = "metric";
   let apiUrl2 = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl2).then(cityFormTemp);
 
   function cityFormTemp(response) {
     let h4 = document.querySelector("h4");
     let temp1 = document.querySelector("#temp1");
+    celciusTemp = response.data.temperature.current;
     let temperature2 = Math.round(response.data.temperature.current);
     h4.innerHTML = `Today in ${response.data.city}`;
-    temp1.innerHTML = `${temperature2}°C`;
+    temp1.innerHTML = `${temperature2}`;
   }
 }
 
@@ -72,16 +72,36 @@ function currentLocation(event) {
     let h4 = document.querySelector("h4");
     let temp1 = document.querySelector("#temp1");
     let temperature = Math.round(response.data.temperature.current);
+    celciusTemp = response.data.temperature.current;
     h4.innerHTML = `Today in ${response.data.city}`;
-    temp1.innerHTML = `${temperature}°C`;
+    temp1.innerHTML = `${temperature}`;
   }
 }
+function convertF(event) {
+  event.preventDefault();
+  let Ftemp = (celciusTemp * 9) / 5 + 32;
+  fahrenTemp = Ftemp;
+  CelciusLink.classList.remove("active");
+  fahrenheightLink.classList.add("active");
+  let tempE = document.querySelector("#temp1");
+  tempE.innerHTML = Math.round(Ftemp);
+}
+
+function convertC(event) {
+  event.preventDefault();
+  fahrenheightLink.classList.remove("active");
+  CelciusLink.classList.add("active");
+  let tempE = document.querySelector("#temp1");
+  tempE.innerHTML = Math.round(celciusTemp);
+}
+let celciusTemp = null;
 let title = document.querySelector(`#title`);
 title.innerHTML = formatDate(currentDate);
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", cityFormValues);
 let currentLoc = document.querySelector("#geoButton");
 currentLoc.addEventListener("click", currentLocation);
-
-//it should display the name of the city on the result page and the current temperature of the city.
-//Add a Current Location button. When clicking on it, it uses the Geolocation API to get your GPS coordinates and display and the city and current temperature using the OpenWeather API.
+let fahrenheightLink = document.querySelector("#F-link");
+fahrenheightLink.addEventListener("click", convertF);
+let CelciusLink = document.querySelector("#C-link");
+CelciusLink.addEventListener("click", convertC);

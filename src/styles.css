@@ -8,8 +8,11 @@ h1 {
 }
 .container {
   border: 1px solid grey;
-  border-radius: 4px;
+  border-radius: 5px;
   border-spacing: 5px;
+}
+.weather-app {
+  margin: 0 auto;
 }
 .card-img-top {
   display: block;
@@ -26,10 +29,6 @@ span {
   display: inline-block;
   width: 25%;
 }
-.city-form {
-  position: static;
-  margin-left: 600px;
-}
 .tableHeader {
   text-align: center;
   margin: 0 auto;
@@ -42,4 +41,13 @@ footer {
 }
 h6 {
   font-family: dancing script;
+}
+.today-card .active {
+  text-decoration: none;
+  color: black;
+  cursor: default;
+}
+.today-card .active:hover {
+  text-decoration: none;
+  cursor: default;
 }

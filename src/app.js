@@ -58,7 +58,9 @@ function cityFormValues(event) {
     currentIcon.setAttribute("alt", response.data.condition.icon);
     h4.innerHTML = `Today in ${response.data.city}`;
     temp1.innerHTML = `${temperature2}`;
-    cardText.innerHTML = response.data.condition.description;
+    cardText.innerHTML =
+      response.data.condition.description.charAt(0).toUpperCase() +
+      response.data.condition.description.slice(1);
   }
 
   function formatDay(timeStamp) {
@@ -127,7 +129,9 @@ function currentLocation(event) {
     currentIcon.setAttribute("alt", response.data.condition.icon);
     h4.innerHTML = `Today in ${response.data.city}`;
     temp1.innerHTML = `${temperature}`;
-    cardText.innerHTML = response.data.condition.description;
+    cardText.innerHTML =
+      response.data.condition.description.charAt(0).toUpperCase() +
+      response.data.condition.description.slice(1);
   }
 
   function formatDay(timeStamp) {
@@ -139,7 +143,6 @@ function currentLocation(event) {
 
   function showForecast(response) {
     let forecast = response.data.daily;
-    console.log(response.data.daily);
     let forecastElement = document.querySelector("#forecast");
     let forecastHTML = `<div class="row-1-col-2 p-4">
     <div class="card-group">`;

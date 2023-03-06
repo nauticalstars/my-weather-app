@@ -51,9 +51,12 @@ function cityFormValues(event) {
     let h4 = document.querySelector("h4");
     let temp1 = document.querySelector("#temp1");
     let temperature2 = Math.round(response.data.temperature.current);
+    let cardText = document.querySelector("#card-text-prime");
+    let currentIcon = document.querySelector("#today-img");
+    currentIcon.setAttribute("src", response.data.condition.icon_url);
+    currentIcon.setAttribute("alt", response.data.condition.icon);
     h4.innerHTML = `Today in ${response.data.city}`;
     temp1.innerHTML = `${temperature2}`;
-    let cardText = document.querySelector("#card-text-prime");
     cardText.innerHTML = response.data.condition.description;
   }
 }
@@ -65,7 +68,7 @@ function currentLocation(event) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let apiKey = "89045e8b02ffo7bc061tb52f38ead08c";
-    let Url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}$units=metric`;
+    let Url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
     console.log(Url);
     axios.get(Url).then(showWeather);
   }
@@ -73,9 +76,12 @@ function currentLocation(event) {
     let h4 = document.querySelector("h4");
     let temp1 = document.querySelector("#temp1");
     let temperature = Math.round(response.data.temperature.current);
+    let cardText = document.querySelector("#card-text-prime");
+    let currentIcon = document.querySelector("#today-img");
+    currentIcon.setAttribute("src", response.data.condition.icon_url);
+    currentIcon.setAttribute("alt", response.data.condition.icon);
     h4.innerHTML = `Today in ${response.data.city}`;
     temp1.innerHTML = `${temperature}`;
-    let cardText = document.querySelector("#card-text-prime");
     cardText.innerHTML = response.data.condition.description;
   }
 }

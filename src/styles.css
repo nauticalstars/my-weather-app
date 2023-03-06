@@ -1,5 +1,6 @@
 body {
   padding: 20px;
+  background-color: linear-gradient(blue, pink);
 }
 h1 {
   text-align: center;
@@ -26,9 +27,8 @@ span {
   margin: 0 auto;
 }
 .card-img-top {
+  width: 100px;
   display: block;
-  width: 50%;
-  font-size: 40px;
   margin: 0 auto;
   padding-top: 5px;
 }
@@ -52,4 +52,11 @@ span {
 }
 .weather-low {
   opacity: 0.5;
+  font-size: 16px;
+}
+.weather-high {
+  font-size: 16px;
+}
+.span .temp1 {
+  font-size: 20px;
 }

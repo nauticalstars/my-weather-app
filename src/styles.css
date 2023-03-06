@@ -6,6 +6,16 @@ h1 {
   font-size: 24px;
   padding: 10px;
 }
+footer {
+  text-align: center;
+}
+h6 {
+  font-family: dancing script;
+}
+span {
+  font-weight: 250;
+  font-style: italic;
+}
 .container {
   border: 1px solid grey;
   border-radius: 5px;
@@ -21,10 +31,6 @@ h1 {
   margin: 0 auto;
   padding-top: 5px;
 }
-span {
-  font-weight: 250;
-  font-style: italic;
-}
 .card {
   display: inline-block;
   width: 25%;
@@ -36,18 +42,9 @@ span {
 .card-header {
   text-align: center;
 }
-footer {
-  text-align: center;
+.card-body {
+  font-size: 16px;
 }
-h6 {
-  font-family: dancing script;
-}
-.today-card .active {
-  text-decoration: none;
-  color: black;
-  cursor: default;
-}
-.today-card .active:hover {
-  text-decoration: none;
-  cursor: default;
+.card-body:first-letter {
+  text-transform: uppercase;
 }

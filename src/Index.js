@@ -28,13 +28,12 @@ function formatDate(date) {
   let currentDay = days[date.getDay()];
   let currentMonth = months[date.getMonth()];
   let currentDate = date.getDate();
-  let currentHour = date.getHours();
-  let currentMin = date.getMinutes();
-  if (currentMin < 10) {
-    currentMin = `0${currentMin}`;
-  }
+  let currentTime = date.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 
-  let formattedDate = `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear} <em><br>${currentHour}:${currentMin}</em></br>`;
+  let formattedDate = `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear} <em><br>${currentTime}</em></br>`;
 
   return formattedDate;
 }
@@ -48,12 +47,14 @@ function cityFormValues(event) {
   axios.get(apiUrl2).then(cityFormTemp);
 
   function cityFormTemp(response) {
+    console.log(response);
     let h4 = document.querySelector("h4");
     let temp1 = document.querySelector("#temp1");
-    celciusTemp = response.data.temperature.current;
     let temperature2 = Math.round(response.data.temperature.current);
     h4.innerHTML = `Today in ${response.data.city}`;
     temp1.innerHTML = `${temperature2}`;
+    let cardText = document.querySelector("#card-text-prime");
+    cardText.innerHTML = response.data.condition.description;
   }
 }
 
@@ -64,7 +65,7 @@ function currentLocation(event) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     let apiKey = "89045e8b02ffo7bc061tb52f38ead08c";
-    let Url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}`;
+    let Url = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}$units=metric`;
     console.log(Url);
     axios.get(Url).then(showWeather);
   }
@@ -72,36 +73,16 @@ function currentLocation(event) {
     let h4 = document.querySelector("h4");
     let temp1 = document.querySelector("#temp1");
     let temperature = Math.round(response.data.temperature.current);
-    celciusTemp = response.data.temperature.current;
     h4.innerHTML = `Today in ${response.data.city}`;
     temp1.innerHTML = `${temperature}`;
+    let cardText = document.querySelector("#card-text-prime");
+    cardText.innerHTML = response.data.condition.description;
   }
 }
-function convertF(event) {
-  event.preventDefault();
-  let Ftemp = (celciusTemp * 9) / 5 + 32;
-  fahrenTemp = Ftemp;
-  CelciusLink.classList.remove("active");
-  fahrenheightLink.classList.add("active");
-  let tempE = document.querySelector("#temp1");
-  tempE.innerHTML = Math.round(Ftemp);
-}
 
-function convertC(event) {
-  event.preventDefault();
-  fahrenheightLink.classList.remove("active");
-  CelciusLink.classList.add("active");
-  let tempE = document.querySelector("#temp1");
-  tempE.innerHTML = Math.round(celciusTemp);
-}
-let celciusTemp = null;
 let title = document.querySelector(`#title`);
 title.innerHTML = formatDate(currentDate);
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", cityFormValues);
 let currentLoc = document.querySelector("#geoButton");
 currentLoc.addEventListener("click", currentLocation);
-let fahrenheightLink = document.querySelector("#F-link");
-fahrenheightLink.addEventListener("click", convertF);
-let CelciusLink = document.querySelector("#C-link");
-CelciusLink.addEventListener("click", convertC);
